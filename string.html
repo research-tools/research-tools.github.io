@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+<!-- <script src="jquery.min.js"></script> -->
+<script>
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+</script>
+</head>
+<body>
+
+<h1>Random six-letter string</h1>
+
+<p>Left-click on any of the "Copy" buttons to copy the corresponding string to the clipboard.  The string can be used for identification.</p>
+
+<p>Press F5 or Ctrl+R to reload this webpage and generate 100 new random lowercase, six-letter strings without 'l', 'q', or 'v' (too similar to other letters).</p>
+
+<big><big><big><pre><table><script>
+function makeid(length) {
+   var result           = '';
+   var characters       = 'abcdefghijkmnoprstuwxyz';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
+
+for (i = 0; i < 100; i++) {
+  string = makeid(6);
+  //document.write('<tr><td>' + i + '</td><td><span id="' + i + '">' + string + '</span></td><td><button onclick="copyToClipboard(\'#' '1\')">Copy</button></td></tr>');
+  document.write('<tr><td align="right">' + i + ' &nbsp;</td><td><span id="' + i + '">' + string + '</span></td><td> &nbsp;<button onclick="copyToClipboard(\'#' + i + '\')">Copy</button></td></tr>');
+}
+</script></table></pre></big></big></big>
+
+</body>
+</html> 
