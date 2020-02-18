@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>Random six-letter string generator</title>
+<title>CHP ID generator</title>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
 <!-- <script src="jquery.min.js"></script> -->
@@ -14,29 +14,40 @@ function copyToClipboard(element) {
 }
 </script>
 </head>
-<body>
+<body style="width:700px">
 
-<h1>Random six-letter string generator</h1>
+<h1>CHP ID generator</h1>
 
 <p>Left-click on any of the "Copy" buttons to copy the corresponding string to the clipboard.  The string can be used for identification.</p>
 
-<p>Press F5 or Ctrl+R to reload this webpage and generate 100 new random lowercase, six-letter strings without 'l', 'q', or 'v' (too similar to other letters).</p>
+<p>Press F5 or Ctrl+R to reload this webpage and generate 200 new strings without 'I', 'O', or 'U' (too similar to other letters).  The strings are random and distinct.</p>
+
+<p><b>The strings on this page are different from each other, but not necessarily different from a string in another generated set.  Make sure you are not editing an existing record (by entering a string that is already an ID in the database) when you meant to create a new record.  If any status icon in the database is not clear (a record already exists with that ID), please go back and copy and paste another string from this page.</b></p>
 
 <big><big><big><pre><table><script>
+var listOfIds = [];
+
 function makeid(length) {
-   var result           = '';
-   var characters       = 'abcdefghijkmnoprstuwxyz';
-   var charactersLength = characters.length;
-   for ( var i = 0; i < length; i++ ) {
+  var result           = '';
+  //var characters       = 'abcdefghijkmnoprstuwxyz' // excludes l, q, v;
+  var characters       = 'ABCDEFGHJKLMNPQRSTVWXYZ' // excludes I, O, U;
+  var charactersLength = characters.length;
+  do {
+    result = '';
+    for ( var i = 0; i < length; i++ ) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
-   }
-   return result;
+    }
+  }  
+  while (listOfIds.indexOf(result) >= 0);
+  listOfIds.push(result);
+  return result;
 }
 
 for (i = 0; i < 100; i++) {
-  string = makeid(6);
+  string1 = makeid(6);
+  string2 = makeid(6);
   //document.write('<tr><td>' + i + '</td><td><span id="' + i + '">' + string + '</span></td><td><button onclick="copyToClipboard(\'#' '1\')">Copy</button></td></tr>');
-  document.write('<tr><td align="right">' + i + ' &nbsp;</td><td><span id="' + i + '">' + string + '</span></td><td> &nbsp;<button onclick="copyToClipboard(\'#' + i + '\')">Copy</button></td></tr>');
+  document.write('<tr><td align="right">' + i + ' &nbsp;</td><td><span id="' + i + '">chp-' + string1 + '</span></td><td> &nbsp;<button onclick="copyToClipboard(\'#' + i + '\')">Copy</button></td><td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td align="right">' + (i + 100) + ' &nbsp;</td><td><span id="' + (i + 100) + '">chp-' + string2 + '</span></td><td> &nbsp;<button onclick="copyToClipboard(\'#' + (i + 100) + '\')">Copy</button></td></tr>');
 }
 </script></table></pre></big></big></big>
 
