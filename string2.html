@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>ID generator for CLINICIAN participants</title>
+<head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+<!-- <script src="jquery.min.js"></script> -->
+<script>
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+</script>
+</head>
+<body style="width:700px">
+
+<h1>ID generator for CLINICIAN participants</h1>
+
+<p>Left-click on any of the "Copy" buttons to copy the corresponding string to the clipboard.  The string can be used for identification.</p>
+
+<p>Press F5 or Ctrl+R to reload this webpage and generate 400 new strings without 'I', 'O', or 'U' (too similar to other letters).  The strings are random and distinct.</p>
+
+<p><b>The strings on this page are different from each other, but not necessarily different from a string in another generated set.  Make sure you are not editing an existing record (by entering a string that is already an ID in the database) when you meant to create a new record.  If any status icon in the database is not clear (a record already exists with that ID), please go back and copy and paste another string from this page.</b></p>
+
+<p>Generated <script>
+var d = Date(Date.now());
+a = d.toString();
+document.write(a) 
+</script>:</p>
+
+<big><big><big><pre><table><script>
+var listOfIds = [];
+
+function makeid(length) {
+  var result           = '';
+  //var characters       = 'abcdefghijkmnoprstuwxyz' // excludes l, q, v;
+  var characters       = 'ABCDEFGHJKLMNPQRSTVWXYZ' // excludes I, O, U;
+  var charactersLength = characters.length;
+  do {
+    result = '';
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+  }  
+  while (listOfIds.indexOf(result) >= 0);
+  listOfIds.push(result);
+  return result;
+}
+
+for (i = 0; i < 200; i++) {
+  string1 = makeid(6);
+  string2 = makeid(6);
+  //document.write('<tr><td>' + i + '</td><td><span id="' + i + '">' + string + '</span></td><td><button onclick="copyToClipboard(\'#' '1\')">Copy</button></td></tr>');
+  document.write('<tr><td align="right">' + i + ' &nbsp;</td><td><span id="' + i + '">c-' + string1 + '</span></td><td> &nbsp;<button onclick="copyToClipboard(\'#' + i + '\')">Copy</button></td><td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td align="right">' + (i + 200) + ' &nbsp;</td><td><span id="' + (i + 200) + '">c-' + string2 + '</span></td><td> &nbsp;<button onclick="copyToClipboard(\'#' + (i + 200) + '\')">Copy</button></td></tr>');
+}
+</script></table></pre></big></big></big>
+
+</body>
+</html>
