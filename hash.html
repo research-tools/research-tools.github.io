@@ -82,23 +82,6 @@ function murmurhash3_32_gc(key, seed) {
 
 	return h1 >>> 0;
 }
-
-
-
-// https://stackoverflow.com/questions/18338890/are-there-any-sha-256-javascript-implementations-that-are-generally-considered-t
-async function sha256(message) {
-    // encode as UTF-8
-    const msgBuffer = new TextEncoder().encode(message);                    
-
-    // hash the message
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-
-    // convert ArrayBuffer to Array
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-
-    // convert bytes to hex string                  
-    const hashHex = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
-    return hashHex;
 }
 </script>
 </head>
@@ -130,8 +113,7 @@ lastName = prompt('Last name:').toUpperCase();
 birthday = prompt('Birthday in the YYYY-MM-DD format:').toUpperCase();
 x = 'Dum spiro spero.' + ' : ' + firstName + ' : ' + 'LOjwSpdfnGeErhBpErgN' + ' : ' +  lastName + ' : ' + 'FsSFkdUXUqVdmPNhEesc' + ' : ' + birthday + ' : ' + 'Primum non nocere.'
 
-x = sha256(x);
-//x = murmurhash3_32_gc(x, 1).toString(16).toUpperCase();
+x = murmurhash3_32_gc(x, 1).toString(16).toUpperCase();
 
 i = 1;
 document.write('<span id="1" style="font-size: 200%; font-family: monospace; font-weight: normal">' + x + '</span><br><br><button onclick="copyToClipboard(\'#1\')">Copy to Clipboard</button>');
